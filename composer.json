@@ -1,0 +1,29 @@
+{
+	"name": "syntatis/coding-standard",
+	"type": "phpcodesniffer-standard",
+	"description": "PHP Coding Standard applied to Syntatis projects",
+	"license": "MIT",
+	"keywords": [
+		"php",
+		"codesniffer",
+		"coding-standard"
+	],
+	"homepage": "https://github.com/syntatis/phpcs-ruleset#README",
+	"authors": [
+		{
+			"name": "Thoriq Firdaus",
+			"homepage": "https://github.com/tfirdaus",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=7.4",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"doctrine/coding-standard": "^12.0"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}
