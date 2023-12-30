@@ -26,6 +26,10 @@
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 		<exclude name="SlevomatCodingStandard.Classes.SuperfluousExceptionNaming"/>
 		<exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion"/>
+
+		<!-- Some of the projects still require to support PHP 7.4 which does not support the follow features -->
+		<exclude name="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion"/>
+		<exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration"/>
 	</rule>
 	<rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
 		<properties>
