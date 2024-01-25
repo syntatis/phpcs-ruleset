@@ -76,6 +76,7 @@
 				<element value="@phpstan-method, @phpstan-property, @psalm-method, @psalm-property"/>
 				<element value="@param, @throws, @return"/>
 				<element value="@phpstan-param, @phpstan-return, @phpstan-throws, @psalm-param, @psalm-return, @psalm-throws"/>
+				<element value="@phpstan-assert, @phpstan-assert-if-true, @phpstan-assert-if-false, @psalm-assert, @psalm-assert-if-true, @psalm-assert-if-false"/>
 			</property>
 		</properties>
 	</rule>
