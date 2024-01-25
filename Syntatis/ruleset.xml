@@ -69,13 +69,13 @@
 					@uses"
 					/>
 				<!-- Psalm annotations essentially overrides PHP docBlocks -->
-				<element value="@phpstan-consistent-constructor, @phpstan-import-type, @phpstan-type"/>
+				<element value="@phpstan-consistent-constructor, @phpstan-import-type, @phpstan-type, @psalm-consistent-constructor, @psalm-import-type, @phpstan-type"/>
 				<element value="@template, @template-implements, @template-extends"/>
 				<element value="@example, @see, @link, @todo"/>
 				<element value="@method, @property"/>
-				<element value="@phpstan-method, @phpstan-property"/>
+				<element value="@phpstan-method, @phpstan-property, @psalm-method, @psalm-property"/>
 				<element value="@param, @throws, @return"/>
-				<element value="@phpstan-param, @phpstan-return, @phpstan-throws"/>
+				<element value="@phpstan-param, @phpstan-return, @phpstan-throws, @psalm-param, @psalm-return, @psalm-throws"/>
 			</property>
 		</properties>
 	</rule>
