@@ -1,7 +1,7 @@
 {
 	"name": "syntatis/coding-standard",
 	"type": "phpcodesniffer-standard",
-	"description": "PHP Coding Standard applied to Syntatis projects",
+	"description": "Curated Coding Standards for PHP and WordPress",
 	"license": "MIT",
 	"keywords": [
 		"php",
@@ -19,7 +19,8 @@
 	"require": {
 		"php": ">=7.4",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-		"doctrine/coding-standard": "^12.0"
+		"doctrine/coding-standard": "^12.0",
+		"wp-coding-standards/wpcs": "^3.0"
 	},
 	"config": {
 		"allow-plugins": {
