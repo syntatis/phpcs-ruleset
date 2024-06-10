@@ -1,7 +1,7 @@
 {
 	"name": "syntatis/coding-standard",
 	"type": "phpcodesniffer-standard",
-	"description": "PHP Coding Standard applied to Syntatis projects",
+	"description": "Curated Coding Standards for PHP and WordPress",
 	"license": "MIT",
 	"keywords": [
 		"php",
