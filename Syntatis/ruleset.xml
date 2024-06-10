@@ -5,6 +5,15 @@
 	name="Syntatis">
 	<description>Curated Coding Standard for PHP</description>
 
+	<!--
+		Trigger error if PHPCSUtils cannot be found.
+		PHPCSUtils does not contain any sniffs, so this rule isn't strictly necessary, but
+		by having this here anyway, if PHPCSUtils is missing, the user will get a
+		descriptive error message during the loading of the ruleset instead of
+		a fatal "class not found" error once the sniffs start running.
+	-->
+	<rule ref="PHPCSUtils"/>
+
 	<!-- Doctrine and Slevomat rules -->
 	<rule ref="Doctrine">
 		<exclude name="Generic.Formatting.MultipleStatementAlignment"/>
@@ -103,8 +112,6 @@
 	<!-- Prevent issues with content before headers -->
 	<rule ref="Generic.Files.ByteOrderMark"/>
 
-	<rule ref="Universal.WhiteSpace.PrecisionAlignment"/>
-
 	<!-- Magic constants (__*__) should be uppercase -->
 	<rule ref="Universal.Constants.UppercaseMagicConstants"/>
 
@@ -126,6 +133,10 @@
 	<!-- Avoid ambiguous conditions -->
 	<rule ref="Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence"/>
 
+	<!-- Use real tabs and not spaces. -->
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+	<rule ref="Universal.WhiteSpace.PrecisionAlignment"/>
+
 	<!-- Ensure functions use all passed parameters -->
 	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
 		<!-- Allow for callbacks that may not use all parameters -->
@@ -139,12 +150,22 @@
 		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInImplementedInterfaceAfterLastUsed"/>
 	</rule>
 
+	<!-- All line endings should be \n. -->
+	<rule ref="Generic.Files.LineEndings">
+		<properties>
+			<property name="eolChar" value="\n"/>
+		</properties>
+	</rule>
+
 	<!-- Don't commit commented-out code -->
 	<rule ref="Squiz.PHP.CommentedOutCode">
 		<properties>
 			<property name="maxPercentage" value="40"/>
 		</properties>
 	</rule>
+
+	<!-- Always have a lowertag PHP open tag. -->
+	<rule ref="Universal.PHP.LowercasePHPTag"/>
 
 	<!-- Check for duplicate array keys -->
 	<rule ref="Universal.Arrays.DuplicateArrayKey"/>
@@ -169,6 +190,9 @@
 
 	<!-- Avoid double negatives "!!" -->
 	<rule ref="Universal.CodeAnalysis.NoDoubleNegative"/>
+
+	<!-- Avoid reserved keywords as function parameter names. -->
+	<rule ref="Universal.NamingConventions.NoReservedKeywordParameterNames"/>
 
 	<!-- General PHP best practices -->
 	<rule ref="Generic.PHP.BacktickOperator"/>
