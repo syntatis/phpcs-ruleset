@@ -3,31 +3,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd"
 	name="Syntatis">
-	<description>PHP Coding Standard</description>
+	<description>Curated Coding Standard for PHP</description>
 
-	<!-- Use colors in output -->
-	<arg name="colors"/>
-
-	<!-- Show progress of the run -->
-	<arg value="p"/>
-
-	<!-- Show sniff codes in all reports -->
-	<arg value="s"/>
-
-	<!-- Only check files with PHP extension -->
-	<arg name="extensions" value="php"/>
-
-	<!-- Show the warning but exit with 0. The Warning is fine -->
-	<config name="ignore_warnings_on_exit" value="1"/>
-
-	<!-- Include full Doctrine Coding Standard -->
+	<!-- Doctrine and Slevomat rules -->
 	<rule ref="Doctrine">
 		<exclude name="Generic.Formatting.MultipleStatementAlignment"/>
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 		<exclude name="SlevomatCodingStandard.Classes.SuperfluousExceptionNaming"/>
 		<exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion"/>
 
-		<!-- Some of the projects still require to support PHP 7.4 which does not support the follow features -->
+		<!-- Skip features not in PHP 7.4 -->
 		<exclude name="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion"/>
 		<exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration"/>
 	</rule>
@@ -35,11 +20,7 @@
 		<properties>
 			<property name="annotationsGroups" type="array">
 				<element value="@phpcsSuppress"/>
-				<!--
-					Tests annotation
-					@link https://phpunit.readthedocs.io/en/7.0/annotations.html
-					The @author annotation is excluded from the list, use @group or @ticket instead.
-              	-->
+				<!-- PHPUnit annotations (see link) -->
 				<element value="
 					@after,
 					@afterClass,
@@ -68,8 +49,15 @@
 					@ticket,
 					@uses"
 					/>
-				<!-- Psalm annotations essentially overrides PHP docBlocks -->
-				<element value="@phpstan-consistent-constructor, @phpstan-import-type, @phpstan-type, @psalm-consistent-constructor, @psalm-import-type, @phpstan-type"/>
+				<!-- Psalm & PHPStan annotations -->
+				<element value="
+					@phpstan-consistent-constructor,
+					@phpstan-import-type,
+					@phpstan-type,
+					@psalm-consistent-constructor,
+					@psalm-import-type,
+					@psalm-type"
+					/>
 				<element value="@template, @template-implements, @template-extends"/>
 				<element value="@example, @see, @link, @todo"/>
 				<element value="@method, @property"/>
@@ -86,20 +74,106 @@
 		<exclude-pattern>/tests/</exclude-pattern>
 	</rule>
 
-	<!-- Generic -->
-	<rule ref="Generic.Files.LineLength">
+	<!-- Avoid using the "goto" statement -->
+	<rule ref="Generic.PHP.DiscourageGoto">
+		<type>error</type>
+		<message>The "goto" language construct should not be used.</message>
+	</rule>
+
+	<!-- "eval()" is a security risk, so don't use it -->
+	<rule ref="Squiz.PHP.Eval.Discouraged">
+		<type>error</type>
+		<message>eval() is a security risk so not allowed.</message>
+	</rule>
+
+	<!-- PHP tags for multiline PHP code in HTML should be on their own lines -->
+	<rule ref="Squiz.PHP.EmbeddedPhp"/>
+
+	<!-- Always use full PHP tags, not shorthand -->
+	<rule ref="Generic.PHP.DisallowShortOpenTag"/>
+	<rule ref="Generic.PHP.DisallowAlternativePHPTags"/>
+
+	<!-- Prefer require[_once] for unconditional includes -->
+	<rule ref="PEAR.Files.IncludingFile.UseRequire">
+		<type>warning</type>
+	</rule>
+	<rule ref="PEAR.Files.IncludingFile.UseRequireOnce">
+		<type>warning</type>
+	</rule>
+	<!-- Prevent issues with content before headers -->
+	<rule ref="Generic.Files.ByteOrderMark"/>
+
+	<rule ref="Universal.WhiteSpace.PrecisionAlignment"/>
+
+	<!-- Magic constants (__*__) should be uppercase -->
+	<rule ref="Universal.Constants.UppercaseMagicConstants"/>
+
+	<!-- The ::class keyword should be lowercase -->
+	<rule ref="Universal.Constants.LowercaseClassResolutionKeyword"/>
+
+	<!-- Only one namespace declaration per file -->
+	<rule ref="Universal.Namespaces.OneDeclarationPerFile"/>
+
+	<!-- Don't use curly brace syntax for namespaces -->
+	<rule ref="Universal.Namespaces.DisallowCurlyBraceSyntax"/>
+
+	<!-- No explicit global namespace declarations -->
+	<rule ref="Universal.Namespaces.DisallowDeclarationWithoutName"/>
+
+	<!-- Prefer __DIR__ over dirname(__FILE__) and use dirname(__DIR__, $levels) over nested dirname() -->
+	<rule ref="Modernize.FunctionCalls.Dirname"/>
+
+	<!-- Avoid ambiguous conditions -->
+	<rule ref="Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence"/>
+
+	<!-- Ensure functions use all passed parameters -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
+		<!-- Allow for callbacks that may not use all parameters -->
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundBeforeLastUsed"/>
+		<!-- Allow for extended class/interface functions -->
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInExtendedClass"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInExtendedClassBeforeLastUsed"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInExtendedClassAfterLastUsed"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInImplementedInterface"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInImplementedInterfaceBeforeLastUsed"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundInImplementedInterfaceAfterLastUsed"/>
+	</rule>
+
+	<!-- Don't commit commented-out code -->
+	<rule ref="Squiz.PHP.CommentedOutCode">
 		<properties>
-			<property name="ignoreComments" value="true"/>
+			<property name="maxPercentage" value="40"/>
 		</properties>
 	</rule>
-	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
-	<rule ref="Generic.WhiteSpace.ScopeIndent">
-		<properties>
-			<property name="indent" value="4" />
-			<property name="tabIndent" value="true" />
-		</properties>
-	</rule>
-	<rule ref="Generic.Files.LineLength.TooLong">
-		<exclude-pattern>/tests/</exclude-pattern>
-	</rule>
+
+	<!-- Check for duplicate array keys -->
+	<rule ref="Universal.Arrays.DuplicateArrayKey"/>
+
+	<!-- No return types for constructors/destructors, or returning values -->
+	<rule ref="Universal.CodeAnalysis.ConstructorDestructorReturn"/>
+
+	<!-- Detect foreach loops using the same variable for key and value -->
+	<rule ref="Universal.CodeAnalysis.ForeachUniqueAssignment"/>
+
+	<!-- Use self instead of static in final classes -->
+	<rule ref="Universal.CodeAnalysis.StaticInFinalClass"/>
+
+	<!-- Avoid if statements as the only statement in an else block -->
+	<rule ref="Universal.ControlStructures.DisallowLonelyIf"/>
+
+	<!-- Separate functions and object-oriented code -->
+	<rule ref="Universal.Files.SeparateFunctionsFromOO"/>
+
+	<!-- Detect useless "echo sprintf(...)" -->
+	<rule ref="Universal.CodeAnalysis.NoEchoSprintf"/>
+
+	<!-- Avoid double negatives "!!" -->
+	<rule ref="Universal.CodeAnalysis.NoDoubleNegative"/>
+
+	<!-- General PHP best practices -->
+	<rule ref="Generic.PHP.BacktickOperator"/>
+	<rule ref="Universal.UseStatements.NoUselessAliases"/>
+	<rule ref="Squiz.Functions.FunctionDuplicateArgument"/>
+	<rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
+	<rule ref="Squiz.Operators.IncrementDecrementUsage"/>
 </ruleset>
