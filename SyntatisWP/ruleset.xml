@@ -9,7 +9,9 @@
 	<rule ref="Syntatis"/>
 
 	<!-- Use lowercase letters for variable, action/filter, and function names. Separate words with underscores. -->
-	<rule ref="WordPress.NamingConventions.ValidFunctionName"/>
+	<rule ref="WordPress.NamingConventions.ValidFunctionName">
+		<exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid" />
+	</rule>
 	<rule ref="WordPress.NamingConventions.ValidHookName"/>
 
 	<!-- Avoid direct database access. -->
