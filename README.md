@@ -1,9 +1,6 @@
-<div align="center">
-  <strong>💅 phpcs-ruleset</strong>
-  <p>Curated Coding Standards for PHP and WordPress</p>
+# 💅 phpcs-ruleset
 
-  ![Packagist PHP Version](https://img.shields.io/packagist/dependency-v/syntatis/coding-standard/php)
-</div>
+![Packagist PHP Version](https://img.shields.io/packagist/dependency-v/syntatis/coding-standard/php)
 
 ---
 
