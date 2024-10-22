@@ -28,8 +28,28 @@
 	<rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
 		<properties>
 			<property name="annotationsGroups" type="array">
+				<element value="@see, @link, @todo, @example"/>
+
+				<!-- Static analysis annotations -->
+				<element value="@template, @template-implements, @template-extends"/>
+				<element value="
+					@phpstan-consistent-constructor,
+					@psalm-consistent-constructor,
+					@phpstan-import-type,
+					@psalm-import-type,
+					@phpstan-type,
+					@psalm-type"
+					/>
+
+				<element value="@var, @phpstan-var, @psalm-var"/>
+				<element value="@method, @phpstan-method, @psalm-method"/>
+				<element value="@property, @phpstan-property, @psalm-property"/>
+				<element value="@param, @phpstan-param, @psalm-param"/>
+				<element value="@return, @phpstan-return, @psalm-return"/>
+				<element value="@throws, @phpstan-throws, @psalm-throws"/>
+
+				<!-- PHPUnit / PHPCS annotations -->
 				<element value="@phpcsSuppress"/>
-				<!-- PHPUnit annotations (see link) -->
 				<element value="
 					@after,
 					@afterClass,
@@ -58,22 +78,6 @@
 					@ticket,
 					@uses"
 					/>
-				<!-- Psalm & PHPStan annotations -->
-				<element value="
-					@phpstan-consistent-constructor,
-					@psalm-consistent-constructor,
-					@phpstan-import-type,
-					@psalm-import-type,
-					@phpstan-type,
-					@psalm-type"
-					/>
-				<element value="@template, @template-implements, @template-extends"/>
-				<element value="@example, @see, @link, @todo"/>
-				<element value="@method, @phpstan-method, @psalm-method"/>
-				<element value="@property, @phpstan-property, @psalm-property"/>
-				<element value="@param, @phpstan-param, @psalm-param"/>
-				<element value="@return, @phpstan-return, @psalm-return"/>
-				<element value="@throws, @phpstan-throws, @psalm-throws"/>
 			</property>
 		</properties>
 	</rule>
