@@ -4,8 +4,8 @@
 	"description": "Curated Coding Standards for PHP and WordPress",
 	"license": "MIT",
 	"keywords": [
-		"php",
-		"codesniffer",
+		"dev",
+		"linter",
 		"coding-standard"
 	],
 	"homepage": "https://github.com/syntatis/phpcs-ruleset#README",
@@ -17,14 +17,15 @@
 		}
 	],
 	"require": {
-		"php": ">=7.4",
-		"dealerdirect/phpcodesniffer-composer-installer": "^1.1",
+		"php": "^7.4 || ^8.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"doctrine/coding-standard": "^13.0",
-		"wp-coding-standards/wpcs": "^3.2"
+		"wp-coding-standards/wpcs": "^3.1"
 	},
 	"config": {
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
-	}
+	},
+	"non-feature-branches": ["dependabot/*"]
 }
