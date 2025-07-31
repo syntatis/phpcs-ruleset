@@ -4,8 +4,8 @@
 	"description": "Curated Coding Standards for PHP and WordPress",
 	"license": "MIT",
 	"keywords": [
-		"php",
-		"codesniffer",
+		"dev",
+		"linter",
 		"coding-standard"
 	],
 	"homepage": "https://github.com/syntatis/phpcs-ruleset#README",
