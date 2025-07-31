@@ -26,5 +26,6 @@
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
-	}
+	},
+	"non-feature-branches": ["dependabot/*"]
 }
