@@ -20,7 +20,7 @@
 		"php": "^7.4 || ^8.0",
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.2",
 		"doctrine/coding-standard": "^13.0",
-		"wp-coding-standards/wpcs": "^3.2"
+		"wp-coding-standards/wpcs": "^3.3"
 	},
 	"config": {
 		"allow-plugins": {
